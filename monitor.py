@@ -38,7 +38,6 @@ class Monitor(threading.Thread):
         rp_to_deliver: list[int] = list(range(len(self.list_rp)))
         rp_received: list[int] = list(range(len(self.list_rp)))
         rp_parking_lot: list[list[int]] = list(range(len(self.list_rp)))
-        rp_vehicles_id: list[int] = []
 
         # Enquanto tiver algo a ser entregue
         while self.num_packages_received != main.packages_P:
@@ -97,21 +96,5 @@ class Monitor(threading.Thread):
 
             time.sleep(0.5)
 
-
-
-    # Atualiza os estados das variaveis globais
-    def update_stats(self, list_rp: list[main.rp.redistribution_point]) -> None:
-
-        sum_pd = sum_r = 0
-
-        for rp in list_rp:
-            sum_pd = sum_pd + rp.get_num_packages_to_deliver()
-            sum_r = sum_r + rp.get_num_packages_received()
-
-        self.num_packages_to_deliver = sum_pd
-        self.num_packages_received = sum_r
-
-        print("Packages Received = ", self.num_packages_received )
-        print("Packages to Deliver = ", self.num_packages_to_deliver)
 
     

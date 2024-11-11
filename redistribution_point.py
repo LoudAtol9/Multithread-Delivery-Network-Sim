@@ -26,7 +26,7 @@ class redistribution_point(threading.Thread):
         self.packages_received: list[dp.delivery_package] = []
         # Fila do Estacionamento
         self.parking_lot: list[dv.delivery_vehicle] = []
-        # Semaforo para controlar acesso a lista
+        # Semaforo para controlar acesso ao estacionamento
         self.parking_semaphore: threading.Semaphore = threading.Semaphore(1)
         # Semaforo para acordar o ponto de redis
         self.semaphore: threading.Semaphore = threading.Semaphore(0)
@@ -47,7 +47,8 @@ class redistribution_point(threading.Thread):
     def give_packages(self, vehicle: dv.delivery_vehicle) -> None:
 
         free_spaces : int = vehicle.get_total_spaces() - vehicle.get_used_spaces()
-        if free_spaces > self.num_packages_to_deliver : free_spaces = self.num_packages_to_deliver
+        if free_spaces > self.num_packages_to_deliver:
+            free_spaces = self.num_packages_to_deliver
 
         self.log_file.queue_string(f"[{vehicle}] recebeu {free_spaces} pacotes de [{self}]\n")
 
@@ -62,7 +63,7 @@ class redistribution_point(threading.Thread):
     # Se nao tiver nenhum pacote ele nao faz nada
     def receive_packages(self, vehicle: dv.delivery_vehicle) -> None:
 
-        package_list : list[dp.delivery_package] = vehicle.unload_packages(self.id)
+        package_list: list[dp.delivery_package] = vehicle.unload_packages(self.id)
 
         self.log_file.queue_string(f"[{vehicle}] entregou {len(package_list)} pacotes para [{self}]\n")
 

@@ -16,8 +16,8 @@ import file_managent as fm
 # Inputs Iniciais
 cargo_spaces_A: int = 4
 redistribution_point_S: int = 5
-vehicle_C: int = 3
-packages_P: int = 20
+vehicle_C: int = 7
+packages_P: int = 40
  
 # Monitor: 
 #   - controla as variaveis globais

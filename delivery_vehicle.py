@@ -90,11 +90,7 @@ class delivery_vehicle(threading.Thread):
     # Chamada pelo ponto de redistribuicao
     def unlock_vehicle(self) -> None:
         self.lock.release() # ------------- destrava -------------
-
-    def condition_to_run(self):
-        if self.monitor.num_packages_to_deliver == 0 and len(self.load_list) == 0:
-            return False
-        return self.monitor.get_num_packages_received() != main.packages_P
+        
 
     # Loop que percorre todas os pontos de distribuicao recebendo e dando pacotes
     def run(self):

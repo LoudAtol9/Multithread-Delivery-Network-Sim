@@ -23,9 +23,9 @@ class delivery_package(threading.Thread):
     # Cronometra o tempo para entrega
     def run(self):
 
-        time_start = time.time()
+        
+        self.file.queue_string(f"[Pacote {self.id}] saiu de [Ponto de Distribuicao {self.origin}] as {time.time()}s\n")
         self.lock.acquire()
-        self.time = time.time() - time_start
+        self.file.queue_string(f"[Pacote {self.id}] chegou em [Ponto de Distribuicao {self.dest}] as {time.time()}s\n")
 
-        self.file.queue_string(f"[Pacote {self.id}] foi de [Ponto de Distribuicao {self.origin}] a [Ponto de Distribuicao {self.dest}] em {self.time}s\n")
         
