@@ -20,25 +20,26 @@ O projeto é composto pelos seguintes arquivos:
 
 ### 1. **`delivery_package.py`**
 - Representa as **encomendas** efetivamente.
-- Cada encomenda é uma thread que registra seu trajeto (ponto de origem e destino) e os tempos de carregamento e descarregamento.
-- Utiliza semáforos para sincronizar com veículos e pontos de redistribuição.
+- Cada encomenda é uma thread que registra seu trajeto (ponto de origem e destino) e os tempo ao carregar e descarregar.
+- Utiliza semáforos para dormir e não usar recurso desnecessariamente.
 
 ### 2. **`delivery_vehicle.py`**
 - Representa os **veículos** que transportam as encomendas.
 - Cada veículo gerencia uma lista de encomendas (limitada pela capacidade de carga do veículo) e segue uma rota circular pelos pontos de redistribuição.
-- Realiza sincronização para carregar/descarregar encomendas e mover entre pontos de redistribuição.
+- Realiza sincronização para carregar/descarregar encomendas e mover entre pontos de redistribuição usando um semaphoro.
 
 ### 3. **`redistribution_point.py`**
 - Representa os **pontos de redistribuição**.
 - Gerencia filas de encomendas e veículos, controlando a transferência de cargas.
-- Usa semáforos para garantir que apenas um veículo é processado por vez.
+- Usa um semáforo (Mutex) para garantir que apenas um veículo é processado por vez e para garantir e usa outro para dormir o processo enquanto não há carros na espera.
 
 ### 4. **`monitor.py`**
 - Fornece monitoramento em tempo real da simulação.
 - Exibe tabelas mostrando o status de cada veículo e ponto de redistribuição, como localização, carga e pacotes processados.
+- Faz a comunicação entre as threads e compartilha dados globais do processo entre elas.
 
 ### 5. **`file_managent.py`**
-- Gerencia a gravação de logs em arquivos de forma concorrente.
+- Gerencia a gravação de logs em arquivos de forma um por vez, como se fosse uma fila de impressão.
 - Utiliza uma fila protegida por semáforos para registrar eventos como carregamento, descarregamento e movimentação das encomendas.
 
 ---
@@ -46,11 +47,11 @@ O projeto é composto pelos seguintes arquivos:
 ## 🚀 Como Executar
 
 ### Pré-requisitos:
-- **Python 3.8** ou superior.
-- Biblioteca adicional (se necessário): `pandas`.
+- **Python 3.9** ou superior.
+- Biblioteca adicional: `pandas`.
 
 ### Execução:
-Execute o programa principal, fornecendo os seguintes argumentos de entrada:
+Execute o programa principal, alterando no código os seguintes argumentos:
 - `S`: Número de pontos de redistribuição.
 - `C`: Número de veículos.
 - `P`: Número de encomendas.
@@ -58,7 +59,7 @@ Execute o programa principal, fornecendo os seguintes argumentos de entrada:
 
 Exemplo de comando:
 ```bash
-$ python main.py 5 3 20 4
+$ python main.py
 ```
 ## 📤 Saídas
 
