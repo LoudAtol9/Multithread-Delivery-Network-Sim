@@ -16,16 +16,16 @@ Este projeto implementa uma aplicação concorrente para simular o comportamento
 
 ## 📂 Estrutura do Projeto
 
-O projeto é composto pelos seguintes módulos:
+O projeto é composto pelos seguintes arquivos:
 
 ### 1. **`delivery_package.py`**
-- Representa as **encomendas**.
+- Representa as **encomendas** efetivamente.
 - Cada encomenda é uma thread que registra seu trajeto (ponto de origem e destino) e os tempos de carregamento e descarregamento.
 - Utiliza semáforos para sincronizar com veículos e pontos de redistribuição.
 
 ### 2. **`delivery_vehicle.py`**
 - Representa os **veículos** que transportam as encomendas.
-- Cada veículo gerencia uma lista de encomendas (limitada pela capacidade de carga) e segue uma rota circular pelos pontos de redistribuição.
+- Cada veículo gerencia uma lista de encomendas (limitada pela capacidade de carga do veículo) e segue uma rota circular pelos pontos de redistribuição.
 - Realiza sincronização para carregar/descarregar encomendas e mover entre pontos de redistribuição.
 
 ### 3. **`redistribution_point.py`**
@@ -66,7 +66,7 @@ $ python main.py 5 3 20 4
 - Exibição em tempo real do status dos veículos, encomendas e pontos de redistribuição.
 
 ### 2. **Logs**
-- Arquivos detalhados com os rastros das encomendas, incluindo os pontos de distribuição acessados e tempos de cada etapa.
+- Arquivos detalhados com os rastros das encomendas, incluindo os pontos de redistribuição acessados e tempos de cada etapa.
 
 #### Exemplo de log:
 ```text
