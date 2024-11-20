@@ -1,6 +1,6 @@
 # Simulador de Rede de Entregas Concorrente
 
-Este projeto implementa uma aplicação concorrente para simular o comportamento de uma rede de entregas. O objetivo é modelar a interação entre encomendas, veículos de transporte e pontos de redistribuição, utilizando conceitos de **concorrência** e **sincronização** aprendidos na disciplina **Sistemas Operacionais I**.
+Este projeto implementa uma aplicação concorrente para simular o comportamento de uma rede de entregas. O objetivo é modelar a interação entre encomendas, veículos de transporte e pontos de redistribuição, utilizando conceitos de **concorrência** e **sincronização** abordados na disciplina **Sistemas Operacionais I**.
 
 ---
 
